@@ -1,12 +1,5 @@
 #pragma once
 
-#include <boost/log/core.hpp>
-#include <boost/log/trivial.hpp>
-#include <boost/log/expressions.hpp> 
-#include <boost/format.hpp>
-#include <boost/log/utility/setup/console.hpp>
-#include <boost/log/utility/setup/common_attributes.hpp>
-
 #include <codecvt>
 
 #include <Windows.h>
@@ -30,8 +23,6 @@
 
 #define INIT_UNICODE_STRING(str) { sizeof(str) - sizeof((str)[0]), sizeof(str) - sizeof((str)[0]), const_cast<PWSTR>(str) }
 
-namespace logging = boost::log;
-namespace keywords = boost::log::keywords;
 
 typedef struct _POOL_PARTY_CMD_ARGS
 {
