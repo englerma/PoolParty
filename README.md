@@ -1,6 +1,19 @@
-
-# PoolParty
+# PoolParty (Fork)
 A collection of fully-undetectable process injection techniques abusing Windows Thread Pools. Presented at Black Hat EU 2023 Briefings under the title - [**The Pool Party You Will Never Forget: New Process Injection Techniques Using Windows Thread Pools**](https://www.blackhat.com/eu-23/briefings/schedule/#the-pool-party-you-will-never-forget-new-process-injection-techniques-using-windows-thread-pools-35446)
+
+## Modifications in This Fork
+
+1. **Changed Shellcode**:
+   - Shellcode changed to havoc demon.
+
+2. **Added Shellcode Encoding**:
+   - Implemented an encoding mechanism for the shellcode to further obfuscate the payload and make it harder to detect.
+
+3. **Removed Boost Statements**:
+   - Eliminated dependencies on the Boost library to simplify the project and reduce external dependencies.
+
+4. **Changed Compiler Settings**:
+   - Modified compiler settings to remove debug symbols and produce a smaller executable. These settings enhance the security and performance of the compiled program.
 
 ## PoolParty Variants
 
@@ -16,14 +29,16 @@ A collection of fully-undetectable process injection techniques abusing Windows 
 | 8  | Insert TP_TIMER work item to the target process's thread pool  |
 
 ## Usage
-```
+
+```sh
 PoolParty.exe -V <VARIANT ID> -P <TARGET PID>
 ```
 
 ## Usage Examples
 
-Insert TP_TIMER work item to process ID 1234
-```
+Insert TP_TIMER work item to process ID 1234:
+
+```sh
 >> PoolParty.exe -V 8 -P 1234
 
 [info]    Starting PoolParty attack against process id: 1234
@@ -36,17 +51,18 @@ Insert TP_TIMER work item to process ID 1234
 [info]    Created TP_TIMER structure associated with the shellcode
 [info]    Allocated TP_TIMER memory in the target process: 00000281DBF00000
 [info]    Written the specially crafted TP_TIMER structure to the target process
-[info]    Modified the target process's TP_POOL tiemr queue list entry to point to the specially crafted TP_TIMER
+[info]    Modified the target process's TP_POOL timer queue list entry to point to the specially crafted TP_TIMER
 [info]    Set the timer queue to expire to trigger the dequeueing TppTimerQueueExpiration
 [info]    PoolParty attack completed successfully
-
 ```
 
 ## Default Shellcode and Customization
-The default shellcode spawns a calculator via the [WinExec API](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winexec). 
 
-To customize the executable to execute, change the path in the end of the `g_Shellcode` variable present in the main.cpp file.
+The default shellcode spawns a calculator via the [WinExec API](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winexec).
+
+To customize the executable to execute, change the path at the end of the `g_Shellcode` variable present in the main.cpp file.
 
 ## Author - Alon Leviev
+
 * LinkedIn - [Alon Leviev](https://il.linkedin.com/in/alonleviev)
 * Twitter - [@_0xDeku](https://twitter.com/_0xDeku)
